@@ -1,6 +1,9 @@
 import type {Metadata} from "next";
 import {Inter} from "next/font/google";
 import "../public/css/globals.css";
+import "@/public/css/main.css";
+import "@/public/css/index.css";
+import "@/public/css/fontawesome-all.min.css";
 import Header from "@/components/header";
 
 const inter = Inter({subsets: ["latin"]});
@@ -16,8 +19,10 @@ export default function RootLayout({children}: Readonly<{
     return (
         <html lang="en">
             <body className={inter.className}>
+            <div id="root">
                 <Header/>
                 {children}
+            </div>
             </body>
         </html>
     );

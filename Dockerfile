@@ -3,10 +3,10 @@ FROM node:18-alpine AS deps
 RUN apk add --no-cache libc6-compat
 
 # 명령어를 실행할 디렉터리 지정
-WORKDIR /usr/src/app
+WORKDIR /home/shberrypi/Desktop
 
 # Dependancy install을 위해 package.json, package-lock.json, yarn.lock 복사
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Dependancy 설치 (새로운 lock 파일 수정 또는 생성 방지)
 RUN yarn --frozen-lockfile
@@ -17,7 +17,7 @@ RUN yarn --frozen-lockfile
 FROM node:18-alpine AS builder
 
 # Docker를 build할때 개발 모드 구분용 환경 변수를 명시함
-ARG ENV_MODE
+#ARG ENV_MODE
 
 # 명령어를 실행할 디렉터리 지정
 WORKDIR /usr/src/app
@@ -27,8 +27,8 @@ COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY . .
 
 # 구축 환경에 따라 env 변수를 다르게 가져가야 하는 경우 환경 변수를 이용해서 env를 구분해준다.
-COPY .env.$ENV_MODE ./.env.production
-RUN yarn build
+#COPY .env.$ENV_MODE ./.env.production
+RUN npm run build
 
 ###########################################################
 

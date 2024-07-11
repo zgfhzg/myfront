@@ -31,3 +31,8 @@ body {
     text-wrap: balance;
   }
 }
+
+#footer {
+  text-align: center;
+  font-weight: bold;
+}

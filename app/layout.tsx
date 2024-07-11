@@ -5,6 +5,7 @@ import "@/public/css/main.css";
 import "@/public/css/index.css";
 import "@/public/css/fontawesome-all.min.css";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -19,10 +20,11 @@ export default function RootLayout({children}: Readonly<{
     return (
         <html lang="en">
             <body className={inter.className}>
-            <div id="root">
-                <Header/>
-                {children}
-            </div>
+                <div id="root">
+                    <Header/>
+                    {children}
+                    <Footer />
+                </div>
             </body>
         </html>
     );

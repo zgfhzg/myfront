@@ -8,12 +8,12 @@ export default function Header() {
             <header id="header">
                 <div className="inner">
                     {/* Logo */}
-                    <a href="/" className="logo">
+                    <div className="logo">
                         <span className="symbol">
                             <Image src="/images/logo.svg" alt="" width="30" height="30" />
                         </span>
-                        <span className="title">React Responsive App</span>
-                    </a>
+                        <span className="title">Personal Blog</span>
+                    </div>
                     {/* Menu Button */}
                     <nav>
                         <ul>

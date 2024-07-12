@@ -36,3 +36,8 @@ body {
   text-align: center;
   font-weight: bold;
 }
+
+#menuTitle {
+  margin: 1em 0 1em 0;
+  font-weight: 500;
+}

@@ -1,8 +1,11 @@
 "use client";
 import NavigationBar from "@/components/navigationbar";
 import Image from "next/image";
+import React from "react";
 
 export default function Header() {
+    const [menuOpen, setMenuOpen] = React.useState(false);
+    
     return (
         <>
             <header id="header">
@@ -15,16 +18,16 @@ export default function Header() {
                         <span className="title">Personal Blog</span>
                     </div>
                     {/* Menu Button */}
-                    <nav>
+                    <nav className={menuOpen ? "menuOpen" : ""}>
                         <ul>
                             <li>
-                                <a href="/" onClick={() => console.log("open")}>Menu</a>
+                                <a href="#menu" onClick={() => setMenuOpen(prevState => !prevState)}>Menu</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
             </header>
-            <NavigationBar />
+            <NavigationBar navClose={() => setMenuOpen(false)}/>
         </>
     )
 }

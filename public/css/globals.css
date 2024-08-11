@@ -35,6 +35,7 @@ body {
 #footer {
   text-align: center;
   font-weight: bold;
+  background: inherit;
 }
 
 #menuTitle {

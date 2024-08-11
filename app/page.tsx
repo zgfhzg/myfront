@@ -34,7 +34,7 @@ export default function Home() {
     return (
         <div id="main">
             <div className="inner">
-                <h1>Welcome! This is private page</h1>
+                <h1 id="homeTitle">Welcome! This is private page</h1>
                 <section className="tiles">
                     {mainMenus.map((item) => (
                         <article className={item.style} key={item.title}>

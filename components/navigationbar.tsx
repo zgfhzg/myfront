@@ -12,10 +12,9 @@ export default function NavigationBar({ navClose }: NavigationBarProps) {
                     <h2 id="menuTitle">Menu</h2>
                     <ul>
                         <li><Link href="/" onClick={navClose}>Home</Link></li>
-                        <li><Link href="/101" onClick={navClose}>101</Link></li>
-                        <li><Link href="/102" onClick={navClose}>102</Link></li>
-                        <li><Link href="/107" onClick={navClose}>107</Link></li>
-                        <li><Link href="/admin" onClick={navClose}>Admin</Link></li>
+                        <li><Link href="/notice" onClick={navClose}>공지사항</Link></li>
+                        <li><Link href="/gallery" onClick={navClose}>갤러리</Link></li>
+                        <li><Link href="/admin" onClick={navClose}>관리자 페이지</Link></li>
                     </ul>
                 </div>
                 <a className="close" href="#" onClick={navClose}>Close</a>

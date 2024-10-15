@@ -1,4 +1,4 @@
-const mainMenus = [
+const galleryList = [
     {
         title: "Magna",
         summary: "Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.",
@@ -37,7 +37,7 @@ export default function IdPage() {
             <div className="inner">
                 <h1 id="homeTitle">Welcome! This is gallery page</h1>
                 <section className="tiles">
-                    {mainMenus.map((item) => (
+                    {galleryList.map((item) => (
                         <article className={item.style} key={item.title}>
                             <span className="image">
                                 <img src={item.img} alt=""/>

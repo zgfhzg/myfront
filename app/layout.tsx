@@ -2,7 +2,6 @@ import type {Metadata} from "next";
 import {Inter} from "next/font/google";
 import "../public/css/globals.css";
 import "@/public/css/main.css";
-import "@/public/css/index.css";
 import "@/public/css/fontawesome-all.min.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";

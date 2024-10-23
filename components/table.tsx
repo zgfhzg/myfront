@@ -2,13 +2,15 @@
 // components/Table.tsx
 import React from 'react';
 import { useTable, Column } from 'react-table';
+import '../public/css/table.css';
 
 interface TableProps<T extends object> {
     columns: Column<T>[];
     data: T[];
+    tableId?: string;
 }
 
-const Table = <T extends object>({ columns, data }: TableProps<T>) => {
+const Table = <T extends object>({ columns, data, tableId }: TableProps<T>) => {
     const {
         getTableProps,
         getTableBodyProps,
@@ -18,7 +20,7 @@ const Table = <T extends object>({ columns, data }: TableProps<T>) => {
     } = useTable({ columns, data });
 
     return (
-        <table {...getTableProps()}>
+        <table {...getTableProps()} id={tableId}>
             <thead>
             {headerGroups.map((headerGroup, index) => (
                 <tr {...headerGroup.getHeaderGroupProps()} key={index}>
@@ -29,14 +31,12 @@ const Table = <T extends object>({ columns, data }: TableProps<T>) => {
             ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-            {rows.map(row => {
+            {rows.map((row, index) => {
                 prepareRow(row);
                 return (
-                    // eslint-disable-next-line react/jsx-key
-                    <tr {...row.getRowProps()}>
-                        {row.cells.map(cell => (
-                            // eslint-disable-next-line react/jsx-key
-                            <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    <tr {...row.getRowProps()} key={index}>
+                        {row.cells.map((cell, j) => (
+                            <td {...cell.getCellProps()} key={j}>{cell.render('Cell')}</td>
                         ))}
                     </tr>
                 );

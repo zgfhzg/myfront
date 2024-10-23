@@ -23,8 +23,8 @@ export default function Budget() {
     return (
         <div id="main">
             <div className="inner">
-                <h1 id="homeTitle">Wedding Budget Calculation</h1>
-                <Table columns={columns} data={data} />
+                <h1 id="pageTitle" className="subtitle">Budget Calculation</h1>
+                <Table tableId="budgetTable" columns={columns} data={data} />
             </div>
         </div>
     )

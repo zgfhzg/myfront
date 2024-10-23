@@ -2368,6 +2368,15 @@ input[type="radio"] + label:before {
     margin-top: 1em;
 }
 
+#pageTitle {
+    margin: 1em auto;
+}
+
+.subtitle {
+    font-size: 1.25em;
+    font-weight: 500;
+}
+
 @media screen and (max-width: 736px) {
 
     .image.main {

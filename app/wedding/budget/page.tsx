@@ -1,7 +1,7 @@
 'use client'
 import Table from "@/components/table";
 import {Column} from "react-table";
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 interface Data {    // 데이터 구조체
     title: string;
@@ -23,18 +23,33 @@ export default function Budget() {
         { Header: '날짜', accessor: 'date' },
         { Header: '결제자', accessor: 'name' },
     ];
+
+    const titleRef = useRef<HTMLInputElement>(null);
+    const amountRef = useRef<HTMLInputElement>(null);
+    const dateRef = useRef<HTMLInputElement>(null);
+    const nameRef = useRef<HTMLInputElement>(null);
     
     const totalPrice = data.reduce((sum, row) => sum + row.amount, 0);
     const addRow = () => {
-        const row = { title: '새항목', amount: 1000000, date: '24/10/23', name: 'SH' };
-        setRows([...data, row]);
+        if (titleRef.current && amountRef.current && dateRef.current && nameRef.current) {
+            const row: Data = {
+                title: titleRef.current.value,
+                amount: parseFloat(amountRef.current.value),
+                date: dateRef.current.value,
+                name: nameRef.current.value,
+            };
+            setRows([...data, row]);
+        }
     }
-    
     return (
         <div id="main">
             <div className="inner">
                 <h1 id="pageTitle" className="subtitle">Budget Calculation</h1>
-                <Table tableId="budgetTable" columns={columns} data={data} totalPrice={totalPrice} />
+                <Table tableId="budgetTable" columns={columns} data={data} totalPrice={totalPrice}/>
+                <input type="text" ref={titleRef} placeholder="항목"/>
+                <input type="number" ref={amountRef} placeholder="금액"/>
+                <input type="date" ref={dateRef} placeholder="날짜"/>
+                <input type="text" ref={nameRef} placeholder="결제자"/>
                 <button onClick={addRow}>추가 테스트</button>
             </div>
         </div>

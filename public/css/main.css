@@ -2139,6 +2139,8 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="tel"],
+input[type="date"],
+input[type="number"],
 select,
 textarea {
     -moz-appearance: none;
@@ -2196,13 +2198,6 @@ select:focus::-ms-value {
 
 select::-ms-expand {
     display: none;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-select {
-    height: 3em;
 }
 
 textarea {

@@ -1,7 +1,8 @@
 'use client'
 import Table from "@/components/table";
 import {Column} from "react-table";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import {format} from "date-fns";
 
 interface Data {    // 데이터 구조체
     title: string;
@@ -35,11 +36,19 @@ export default function Budget() {
             const row: Data = {
                 title: titleRef.current.value,
                 amount: parseFloat(amountRef.current.value),
-                date: dateRef.current.value,
+                date: format(new Date(dateRef.current.value), 'yy/MM/dd'),
                 name: nameRef.current.value,
             };
             setRows([...data, row]);
         }
+    }
+    const [date, setDate] = useState('');
+    useEffect(() => {
+        const today = new Date().toISOString().substring(0, 10);
+        setDate(today);
+    }, []);
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setDate(event.target.value);
     }
     return (
         <div id="main">
@@ -48,8 +57,9 @@ export default function Budget() {
                 <Table tableId="budgetTable" columns={columns} data={data} totalPrice={totalPrice}/>
                 <input type="text" ref={titleRef} placeholder="항목"/>
                 <input type="number" ref={amountRef} placeholder="금액"/>
-                <input type="date" ref={dateRef} placeholder="날짜"/>
-                <input type="text" ref={nameRef} placeholder="결제자"/>
+                <input type="date" ref={dateRef} placeholder="날짜" value={date} onChange={handleChange}/>
+                <input type={"checkbox"} name={"pay"} value={"SH"} ref={nameRef}/><label>SH</label>
+                <input type={"checkbox"} name={"pay"} value={"YB"} ref={nameRef}/><label>YB</label>
                 <button onClick={addRow}>추가 테스트</button>
             </div>
         </div>

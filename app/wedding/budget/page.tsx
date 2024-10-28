@@ -63,7 +63,7 @@ export default function Budget() {
         <div id="main">
             <div className="inner">
                 <h1 id="pageTitle" className="subtitle">Budget Calculation</h1>
-                <Table tableId="budgetTable" columns={columns} data={data} totalPrice={totalPrice}/>
+                <Table tableId="budgetTable" columns={columns} data={data} totalPrice={totalPrice} isTfoot={true}/>
                 <input type="text" ref={titleRef} placeholder="항목"/>
                 <input type="number" ref={amountRef} placeholder="금액"/>
                 <input type="date" ref={dateRef} placeholder="날짜" value={date} onChange={handleChange}/>

@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTable, Column } from 'react-table';
 import '../public/css/table.css';
+import Tfoot from "@/components/tfoot";
 
 interface TableProps<T extends object> {
     columns: Column<T>[];
@@ -43,12 +44,7 @@ const Table = <T extends object>({ columns, data, totalPrice, tableId }: TablePr
                     );
                 })}
             </tbody>
-            <tfoot>
-                <tr>
-                    <td>합계</td>
-                    <td colSpan={3}>{totalPrice}</td>
-                </tr>
-            </tfoot>
+            <Tfoot isTfoot={isTfoot} totalPrice={totalPrice} />
         </table>
     );
 };

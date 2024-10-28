@@ -64,9 +64,9 @@ export default function Budget() {
             <div className="inner">
                 <h1 id="pageTitle" className="subtitle">Budget Calculation</h1>
                 <Table tableId="budgetTable" columns={columns} data={data} totalPrice={totalPrice} isTfoot={true}/>
-                <input type="text" ref={titleRef} placeholder="항목"/>
-                <input type="number" ref={amountRef} placeholder="금액"/>
-                <input type="date" ref={dateRef} placeholder="날짜" value={date} onChange={handleChange}/>
+                <input type="text" className={"wid50"} ref={titleRef} placeholder="항목"/>
+                <input type="number" className={"wid50"} ref={amountRef} placeholder="금액"/>
+                <input type="date" className={"wid50"} ref={dateRef} placeholder="날짜" value={date} onChange={handleChange}/>
                 <label><input type={"checkbox"} name={"pay"} ref={aRef} value={"A"}/>A</label>
                 <label><input type={"checkbox"} name={"pay"} ref={bRef} value={"B"}/>B</label>
                 <button onClick={addRow}>추가 테스트</button>

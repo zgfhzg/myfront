@@ -1,7 +1,7 @@
 'use client'
 import Table from "@/components/table";
 import {Column} from "react-table";
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {format} from "date-fns";
 
 interface Data {    // 데이터 구조체
@@ -28,16 +28,24 @@ export default function Budget() {
     const titleRef = useRef<HTMLInputElement>(null);
     const amountRef = useRef<HTMLInputElement>(null);
     const dateRef = useRef<HTMLInputElement>(null);
-    const nameRef = useRef<HTMLInputElement>(null);
+    const aRef = useRef<HTMLInputElement>(null);
+    const bRef = useRef<HTMLInputElement>(null);
     
     const totalPrice = data.reduce((sum, row) => sum + row.amount, 0);
     const addRow = () => {
-        if (titleRef.current && amountRef.current && dateRef.current && nameRef.current) {
+        if (titleRef.current && amountRef.current && dateRef.current && aRef.current && bRef.current) {
+            const checkValue = [];
+            if (aRef.current.checked) {
+                checkValue.push(aRef.current.value);
+            }
+            if (bRef.current.checked) {
+                checkValue.push(bRef.current.value);
+            }
             const row: Data = {
                 title: titleRef.current.value,
                 amount: parseFloat(amountRef.current.value),
                 date: format(new Date(dateRef.current.value), 'yy/MM/dd'),
-                name: nameRef.current.value,
+                name: checkValue.join("/"),
             };
             setRows([...data, row]);
         }
@@ -50,6 +58,7 @@ export default function Budget() {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDate(event.target.value);
     }
+    
     return (
         <div id="main">
             <div className="inner">
@@ -58,8 +67,8 @@ export default function Budget() {
                 <input type="text" ref={titleRef} placeholder="항목"/>
                 <input type="number" ref={amountRef} placeholder="금액"/>
                 <input type="date" ref={dateRef} placeholder="날짜" value={date} onChange={handleChange}/>
-                <input type={"checkbox"} name={"pay"} value={"SH"} ref={nameRef}/><label>SH</label>
-                <input type={"checkbox"} name={"pay"} value={"YB"} ref={nameRef}/><label>YB</label>
+                <label><input type={"checkbox"} name={"pay"} ref={aRef} value={"A"}/>A</label>
+                <label><input type={"checkbox"} name={"pay"} ref={bRef} value={"B"}/>B</label>
                 <button onClick={addRow}>추가 테스트</button>
             </div>
         </div>

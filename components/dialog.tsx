@@ -15,8 +15,10 @@ const Dialog: React.FC<DialogProps> = ({ isOpen, onClose , title , htmlContent ,
     return (
         <div className="dialog-backdrop" onClick={onClose}>
             <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
-                <h2>{title}</h2>
-                <DynamicContent htmlContent={htmlContent} />
+                <h2 id="dialogTitle">{title}</h2>
+                <div id="dynamicContentDiv">
+                    <DynamicContent htmlContent={htmlContent} />
+                </div>
                 <button onClick={onClose}>닫기</button>
                 <button onClick={onSave} className={"right"}>저장</button>
             </div>

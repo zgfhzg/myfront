@@ -120,6 +120,7 @@ code {
 #dialogTitle {
   font-size: 1em;
   font-weight: 700;
+  letter-spacing: normal;
 }
 
 #dynamicContentDiv {

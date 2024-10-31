@@ -3,6 +3,7 @@ import Table from "@/components/table";
 import {Column} from "react-table";
 import React, {useEffect, useRef, useState} from "react";
 import {format} from "date-fns";
+import Dialog from "@/components/dialog";
 
 interface Data {    // 데이터 구조체
     title: string;
@@ -58,18 +59,33 @@ export default function Budget() {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDate(event.target.value);
     }
-    
+
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const openDialog = () => setIsDialogOpen(true);
+    const closeDialog = () => setIsDialogOpen(false);
+
+    const inputContent = '<input type="text" ref={titleRef} placeholder="항목"/>\n' +
+        '                <input type="number" ref={amountRef} placeholder="금액"/>\n' +
+        '                <input type="date" class="wid100" ref={dateRef} placeholder="날짜" value={date} onChange={handleChange}/>\n' +
+        '                <label><input type="checkbox" name={"pay"} ref={aRef} value={"A"}/>A</label>\n' +
+        '                <label><input type="checkbox" name={"pay"} ref={bRef} value={"B"}/>B</label>';
+    const [htmlContent, setHtmlContent] = useState(inputContent);
+
+    function save() {
+        console.log('save');
+        // rest api에 저장 request
+    }
+
     return (
         <div id="main">
             <div className="inner">
                 <h1 id="pageTitle" className="subtitle">Budget Calculation</h1>
+                <div>
+                    <div className="button left plus" onClick={openDialog}>추가</div>
+                    <Dialog isOpen={isDialogOpen} onClose={closeDialog} htmlContent={htmlContent} title={"경비 사용내역 추가"} onSave={addRow}/>
+                    <div className="button right" onClick={save}>저장</div>
+                </div>
                 <Table tableId="budgetTable" columns={columns} data={data} totalPrice={totalPrice} isTfoot={true}/>
-                <input type="text" className={"wid50"} ref={titleRef} placeholder="항목"/>
-                <input type="number" className={"wid50"} ref={amountRef} placeholder="금액"/>
-                <input type="date" className={"wid50"} ref={dateRef} placeholder="날짜" value={date} onChange={handleChange}/>
-                <label><input type={"checkbox"} name={"pay"} ref={aRef} value={"A"}/>A</label>
-                <label><input type={"checkbox"} name={"pay"} ref={bRef} value={"B"}/>B</label>
-                <button onClick={addRow}>추가 테스트</button>
             </div>
         </div>
     )

@@ -77,7 +77,7 @@ const DynamicDialog: React.FC<DialogProps> = ({isOpen, onClose, onSubmit, title,
                                 return (
                                     <div className="align-right">
                                         {element.options?.map((option) => (
-                                            <label key={option}><input type={element.type} name={element.name} value={option}/>{option}</label>
+                                            <label key={option}><input type={element.type} name={element.name} value={option} onChange={handleChange}/>{option}</label>
                                         ))}
                                     </div>
                                 )

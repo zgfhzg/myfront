@@ -26,50 +26,27 @@ export default function Budget() {
         { Header: '결제자', accessor: 'name' },
     ];
 
-    const titleRef = useRef<HTMLInputElement>(null);
-    const amountRef = useRef<HTMLInputElement>(null);
-    const dateRef = useRef<HTMLInputElement>(null);
-    const aRef = useRef<HTMLInputElement>(null);
-    const bRef = useRef<HTMLInputElement>(null);
-    
-    const totalPrice = data.reduce((sum, row) => sum + row.amount, 0);
-    const addRow = () => {
-        if (titleRef.current && amountRef.current && dateRef.current && aRef.current && bRef.current) {
-            const checkValue = [];
-            if (aRef.current.checked) {
-                checkValue.push(aRef.current.value);
-            }
-            if (bRef.current.checked) {
-                checkValue.push(bRef.current.value);
-            }
-            const row: Data = {
-                title: titleRef.current.value,
-                amount: parseFloat(amountRef.current.value),
-                date: format(new Date(dateRef.current.value), 'yy/MM/dd'),
-                name: checkValue.join("/"),
-            };
-            setRows([...data, row]);
-        }
-    }
-    const [date, setDate] = useState('');
-    useEffect(() => {
-        const today = new Date().toISOString().substring(0, 10);
-        setDate(today);
-    }, []);
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setDate(event.target.value);
-    }
-
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const openDialog = () => setIsDialogOpen(true);
     const closeDialog = () => setIsDialogOpen(false);
 
-    const inputContent = '<input type="text" ref={titleRef} placeholder="항목"/>\n' +
-        '                <input type="number" ref={amountRef} placeholder="금액"/>\n' +
-        '                <input type="date" class="wid100" ref={dateRef} placeholder="날짜" value={date} onChange={handleChange}/>\n' +
-        '                <label><input type="checkbox" name={"pay"} ref={aRef} value={"A"}/>A</label>\n' +
-        '                <label><input type="checkbox" name={"pay"} ref={bRef} value={"B"}/>B</label>';
-    const [htmlContent, setHtmlContent] = useState(inputContent);
+    const elements = [
+        { type: 'text', name: 'title', placeholder: '항목' },
+        { type: 'number', name: 'amount', placeholder: '가격' },
+        { type: 'date', name: 'date', placeholder: '날짜', className: 'wid100' },
+        { type: 'checkbox', name: 'name', title: '결제자', options: ['SH', 'YB'] },
+    ];
+
+    const totalPrice = data.reduce((sum, row) => sum + row.amount, 0);
+    const addRow = (subData: Record<string, any>) => {
+        const newData: Data = {
+            title: subData.title,
+            amount: subData.amount,
+            date: subData.date,
+            name: subData.name,
+        }
+        setRows([...data, newData]);
+    }
 
     function save() {
         console.log('save');
@@ -82,7 +59,7 @@ export default function Budget() {
                 <h1 id="pageTitle" className="subtitle">Budget Calculation</h1>
                 <div>
                     <div className="button left plus" onClick={openDialog}>추가</div>
-                    <Dialog isOpen={isDialogOpen} onClose={closeDialog} htmlContent={htmlContent} title={"경비 사용내역 추가"} onSave={addRow}/>
+                    <Dialog isOpen={isDialogOpen} onClose={closeDialog} onSubmit={addRow} title={"경비 사용 내역"} elements={elements}/>
                     <div className="button right" onClick={save}>저장</div>
                 </div>
                 <Table tableId="budgetTable" columns={columns} data={data} totalPrice={totalPrice} isTfoot={true}/>

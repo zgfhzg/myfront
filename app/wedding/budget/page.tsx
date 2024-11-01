@@ -14,9 +14,9 @@ interface Data {    // 데이터 구조체
 
 export default function Budget() {
     const [data, setRows] = useState([  // 실제 데이터 값
-        { title: '계약금', amount: 1500000 , date: '24/09/01', name: 'SH' },
-        { title: '사진', amount: 500000, date: '24/09/20', name: 'SH' },
-        { title: '비행기', amount: 5000000, date: '24/10/22', name: 'SH' },
+        { title: '계약금', amount: 1500000 , date: '24/09/01', name: 'A' },
+        { title: '사진', amount: 500000, date: '24/09/20', name: 'A' },
+        { title: '비행기', amount: 5000000, date: '24/10/22', name: 'A' },
     ]);
 
     const columns: Column<Data>[] = [
@@ -34,15 +34,15 @@ export default function Budget() {
         { type: 'text', name: 'title', placeholder: '항목' },
         { type: 'number', name: 'amount', placeholder: '가격' },
         { type: 'date', name: 'date', placeholder: '날짜', className: 'wid100' },
-        { type: 'checkbox', name: 'name', title: '결제자', options: ['SH', 'YB'] },
+        { type: 'checkbox', name: 'name', title: '결제자', options: ['A', 'B'] },
     ];
 
     const totalPrice = data.reduce((sum, row) => sum + row.amount, 0);
     const addRow = (subData: Record<string, any>) => {
         const newData: Data = {
             title: subData.title,
-            amount: subData.amount,
-            date: subData.date,
+            amount: Number(subData.amount),
+            date: format(subData.date, 'yy/MM/dd'),
             name: subData.name,
         }
         setRows([...data, newData]);

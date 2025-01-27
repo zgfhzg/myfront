@@ -56,7 +56,7 @@ export default function Budget() {
     return (
         <div id="main">
             <div className="inner">
-                <h1 id="pageTitle" className="subtitle">Budget Calculation</h1>
+                <h1 id="pageTitle" className="subtitle">결혼 예산 사용 내역</h1>
                 <div>
                     <div className="button left plus" onClick={openDialog}>추가</div>
                     <Dialog isOpen={isDialogOpen} onClose={closeDialog} onSubmit={addRow} title={"경비 사용 내역"} elements={elements}/>

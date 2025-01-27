@@ -75,7 +75,7 @@ const DynamicDialog: React.FC<DialogProps> = ({isOpen, onClose, onSubmit, title,
                                 );
                             case 'checkbox':
                                 return (
-                                    <div className="align-right">
+                                    <div className="align-right" key={element.name}>
                                         {element.options?.map((option) => (
                                             <label key={option}><input type={element.type} name={element.name} value={option} onChange={handleChange}/>{option}</label>
                                         ))}

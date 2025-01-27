@@ -90,11 +90,7 @@ code {
   font-size: 0.8em;
   font-weight: 900;
   height: 2em;
-  width: 3em;
-  letter-spacing: 0.1em;
   line-height: 2.2em;
-  overflow: hidden;
-  text-align: center;
 }
 
 /* dialog css */

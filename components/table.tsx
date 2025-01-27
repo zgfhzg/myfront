@@ -10,9 +10,10 @@ interface TableProps<T extends object> {
     data: T[];
     totalPrice: number;
     tableId?: string;
+    isTfoot: boolean;
 }
 
-const Table = <T extends object>({ columns, data, totalPrice, tableId }: TableProps<T>) => {
+const Table = <T extends object>({ columns, data, totalPrice, tableId, isTfoot }: TableProps<T>) => {
     const {
         getTableProps,
         getTableBodyProps,

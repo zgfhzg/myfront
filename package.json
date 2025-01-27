@@ -11,9 +11,10 @@
   "dependencies": {
     "@types/react-table": "^7.7.20",
     "date-fns": "^4.1.0",
-    "next": "14.2.4",
+    "next": "15.1.2",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-table": "^7.8.0"
   },
   "devDependencies": {
     "@types/node": "^20",

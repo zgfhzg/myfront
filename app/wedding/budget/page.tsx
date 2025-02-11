@@ -13,11 +13,15 @@ interface Data {    // 데이터 구조체
 }
 
 export default function Budget() {
-    const [data, setRows] = useState([  // 실제 데이터 값
-        { name: '계약금', price: 1500000 , payDate: '24/09/01', payer: 'A' },
-        { name: '사진', price: 500000, payDate: '24/09/20', payer: 'A' },
-        { name: '비행기', price: 5000000, payDate: '24/10/22', payer: 'A' },
-    ]);
+    const [data, setRows] = useState<Data[]>([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            const res = await fetch('/api/data');  // 실제 API 엔드포인트로 변경
+            return await res.json();
+        }
+        fetchData().then(res => setRows(res));
+    }, []);
 
     const columns: Column<Data>[] = [
         { Header: '항목', accessor: 'name' },

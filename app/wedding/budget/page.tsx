@@ -15,14 +15,11 @@ interface Data {    // 데이터 구조체
 export default function Budget() {
     const [data, setRows] = useState<Data[]>([]);
 
-    useEffect(() => {
-        async function fetchData() {
-            const res = await fetch('/api/data');  // 실제 API 엔드포인트로 변경
-            return await res.json();
-        }
-        fetchData().then(res => setRows(res));
-    }, []);
-
+    async function fetchData() {
+        const res = await fetch('https://api.example.com/data');
+        return await res.json();
+    }
+    
     const columns: Column<Data>[] = [
         { Header: '항목', accessor: 'name' },
         { Header: '금액', accessor: 'price' },
@@ -53,9 +50,32 @@ export default function Budget() {
     }
 
     function save() {
-        console.log('save');
-        // rest api에 저장 request
+        fetch('/api/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(result => {
+            console.log('Success:', result);
+            fetchData().then(res => setRows(res));
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('저장 중 오류가 발생했습니다.');
+        });
     }
+
+    useEffect(() => {
+        fetchData().then(res => setRows(res));
+    }, []);
 
     return (
         <div id="main">

@@ -15,7 +15,7 @@ export default function NavigationBar({ navClose }: NavigationBarProps) {
                         <li><Link href="/notice" onClick={navClose}>공지사항</Link></li>
                         <li><Link href="/gallery" onClick={navClose}>갤러리</Link></li>
                         <li><Link href="/admin" onClick={navClose}>관리자 페이지</Link></li>
-                        <li><Link href="/wedding/budget" onClick={navClose}>경비 관리</Link></li>
+                        <li><Link href="/budget" onClick={navClose}>경비 관리</Link></li>
                     </ul>
                 </div>
                 <a className="close" href="#" onClick={navClose}>Close</a>

@@ -2570,6 +2570,11 @@ button:disabled,
     opacity: 0.25;
 }
 
+.dialogBtn {
+    height: 2em;
+    line-height: 2em;
+}
+
 /* Tiles */
 
 .tiles {

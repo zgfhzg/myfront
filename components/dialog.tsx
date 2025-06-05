@@ -87,8 +87,8 @@ const DynamicDialog: React.FC<DialogProps> = ({isOpen, onClose, onSubmit, title,
                     })}
                 </div>
                 <div className="btns">
-                    <button onClick={onClose}>닫기</button>
-                    <button onClick={handleSubmit} className="right">추가</button>
+                    <button onClick={onClose} className={"dialogBtn"}>닫기</button>
+                    <button onClick={handleSubmit} className="right dialogBtn">추가</button>
                 </div>
             </div>
         </div>
